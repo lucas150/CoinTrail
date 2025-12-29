@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+
+import 'package:cointrail/common/buttons/primary_button.dart';
 import 'package:cointrail/core_utils/constants/text_strings.dart';
+import 'package:cointrail/core_utils/constants/sizes.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_circle.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_controller.dart';
-import 'package:flutter/material.dart';
 
 class SplashOnboardingScreen extends StatefulWidget {
   const SplashOnboardingScreen({super.key});
@@ -29,45 +32,62 @@ class _SplashOnboardingScreenState extends State<SplashOnboardingScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final colors = theme.colorScheme;
 
-    return Scaffold(
-      backgroundColor: splash.backgroundColor.value, // Use animated background
-      body: AnimatedBuilder(
-        animation: splash.controller,
-        builder: (context, _) {
-          // Switch text color when circle is big
-          final bool showOnPrimaryText = splash.circleRadius.value > 90;
+    return AnimatedBuilder(
+      animation: splash.controller,
+      builder: (context, _) {
+        // Background switches when flood fill starts
+        final bool isFloodFill =
+            splash.circleRadius.value >= TTexts.expandedRadius;
 
-          return Stack(
+        return Scaffold(
+          backgroundColor: colors.surface,
+          body: Stack(
             children: [
-              /// Animated circle
+              /// Animated splash shape
               SplashCircle(
                 positionFromTop: splash.circlePosition.value,
                 radius: splash.circleRadius.value,
-                // 👇 pass theme color instead of constant
-                color: colorScheme.primary,
+                bottomContraction: splash.bottomContraction.value,
               ),
 
-              /// App name text
+              /// App name
               Center(
                 child: Opacity(
                   opacity: splash.contentOpacity.value,
                   child: Text(
                     TTexts.appName,
-                    style: theme.textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: showOnPrimaryText
-                          ? colorScheme.onPrimary
-                          : colorScheme.primary,
+                    style: theme.textTheme.displayLarge?.copyWith(
+                      color: isFloodFill ? colors.onPrimary : colors.primary,
+                    ),
+                  ),
+                ),
+              ),
+
+              /// CTA Buttons (final stage)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: TSizes.bottomPadding,
+                child: Opacity(
+                  opacity: splash.buttonsOpacity.value,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: TSizes.lg),
+                    child: Column(
+                      children: [
+                        TPrimaryButton(text: TTexts.signUp, onPressed: () {}),
+                        const SizedBox(height: TSizes.sm),
+                        TPrimaryButton(text: TTexts.login, onPressed: () {}),
+                      ],
                     ),
                   ),
                 ),
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

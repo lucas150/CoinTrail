@@ -1,3 +1,4 @@
+import 'package:cointrail/core_utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 
 class SplashController {
@@ -6,79 +7,94 @@ class SplashController {
   late final Animation<double> circlePosition;
   late final Animation<double> circleRadius;
   late final Animation<double> contentOpacity;
-  late final Animation<Color?>
-  backgroundColor; // Add background color animation
+  late final Animation<double> buttonsOpacity;
+  late final Animation<double> bottomContraction;
 
   SplashController(TickerProvider vsync) {
     controller = AnimationController(
       vsync: vsync,
-      duration: const Duration(milliseconds: 2500),
+      duration: const Duration(milliseconds: TTexts.totalDurationMs),
     );
 
-    // Stage 1 (0-60%): Circle drops from top to 70% with one bounce back to center
-    // Stage 2 (60-100%): Circle stays at center (0.5) and expands smoothly
+    // -----------------------------
+    // Circle vertical position
+    // -----------------------------
     circlePosition = TweenSequence<double>([
       TweenSequenceItem(
         tween: Tween<double>(
           begin: 0.0,
-          end: 0.7,
+          end: TTexts.dropEnd,
         ).chain(CurveTween(curve: Curves.easeIn)),
-        weight: 30.0, // Drop down
+        weight: 10,
       ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 0.7, end: 0.50).chain(
-          CurveTween(curve: Curves.easeOut),
-        ), // Single smooth bounce back to center
-        weight: 10.0,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 0.50, end: 0.50), // Stay at center
-        weight: 60.0,
-      ),
-    ]).animate(controller);
-
-    // Stage 1 (0-60%): Small circle
-    // Stage 2 (60-100%): Circle expands smoothly from center without bouncing
-    circleRadius = TweenSequence<double>([
       TweenSequenceItem(
         tween: Tween<double>(
-          begin: 50.0,
-          end: 50.0,
-        ), // Stay small during drop/bounce
+          begin: TTexts.dropEnd,
+          end: TTexts.center,
+        ).chain(CurveTween(curve: Curves.easeOut)),
+        weight: 5,
+      ),
+      TweenSequenceItem(
+        tween: ConstantTween<double>(TTexts.center),
         weight: 50.0,
       ),
+    ]).animate(controller);
+
+    // -----------------------------
+    // Circle radius
+    // -----------------------------
+    circleRadius = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(
-          begin: 50.0,
-          end: 100.0,
-        ).chain(CurveTween(curve: Curves.easeOutBack)), // Expand smoothly
-        weight: 40.0,
+        tween: ConstantTween<double>(TTexts.initialRadius),
+        weight: 30.0,
       ),
       TweenSequenceItem(
         tween: Tween<double>(
-          begin: 100.0,
-          end: 800.0, // Flood fill entire screen
+          begin: TTexts.initialRadius,
+          end: TTexts.expandedRadius,
+        ).chain(CurveTween(curve: Curves.easeOutBack)),
+        weight: 30.0,
+      ),
+      TweenSequenceItem(
+        tween: Tween<double>(
+          begin: TTexts.expandedRadius,
+          end: TTexts.floodRadius,
         ).chain(CurveTween(curve: Curves.easeInOut)),
-        weight: 40.0,
+        weight: 25.0,
+      ),
+      TweenSequenceItem(
+        tween: ConstantTween<double>(TTexts.floodRadius),
+        weight: 45.0,
       ),
     ]).animate(controller);
 
-    // Text opacity (appears immediately and stays)
-    contentOpacity = Tween<double>(begin: 1.0, end: 1.0).animate(controller);
+    // -----------------------------
+    // Content opacity (always visible)
+    // -----------------------------
+    contentOpacity = ConstantTween<double>(1.0).animate(controller);
 
-    // Background color animation (changes from white to blue during flood fill)
-    backgroundColor =
-        ColorTween(
-          begin: Colors.white,
-          end: const Color(0xFF001BFF), // Blue color to match the circle
-        ).animate(
+    // -----------------------------
+    // Buttons (final stage only)
+    // -----------------------------
+    buttonsOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: const Interval(0.90, 1.0, curve: Curves.easeIn),
+      ),
+    );
+
+    // -----------------------------
+    // Bottom contraction
+    // -----------------------------
+    bottomContraction = Tween<double>(begin: 1.0, end: TTexts.minContraction)
+        .animate(
           CurvedAnimation(
             parent: controller,
             curve: const Interval(
-              0.6,
-              1.0,
+              TTexts.contractionStart,
+              TTexts.contractionEnd,
               curve: Curves.easeInOut,
-            ), // During Stage 3 flood fill
+            ),
           ),
         );
   }

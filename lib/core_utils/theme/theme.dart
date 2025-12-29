@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'color_scheme.dart';
 
 import 'widget_themes/appbar_theme.dart';
 import 'widget_themes/elevated_button_theme.dart';
@@ -7,28 +8,45 @@ import 'widget_themes/text_field_theme.dart';
 import 'widget_themes/text_theme.dart';
 
 class TAppTheme {
-  TAppTheme._();
+  const TAppTheme._();
 
-  static ThemeData lightTheme = ThemeData(
-    // scaffoldBackgroundColor: Colors.white,
-    brightness: Brightness.light,
-    colorScheme: ColorScheme.light(), // Add this
+  /* ============================================================
+   * Light Theme
+   * ============================================================ */
+  static final ThemeData light = ThemeData(
     useMaterial3: true,
-    textTheme: TTextTheme.lightTextTheme,
-    appBarTheme: TAppBarTheme.lightAppBarTheme,
-    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
-    outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
-    inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
+    brightness: Brightness.light,
+
+    colorScheme: TColorScheme.light,
+    scaffoldBackgroundColor: TColorScheme.light.surface,
+
+    textTheme: TTextTheme.light,
+    appBarTheme: TAppBarTheme.light,
+
+    elevatedButtonTheme: TElevatedButtonTheme.theme(TColorScheme.light),
+
+    outlinedButtonTheme: TOutlinedButtonTheme.theme(TColorScheme.light),
+
+    inputDecorationTheme: TTextFormFieldTheme.light(TColorScheme.light),
   );
 
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    textTheme: TTextTheme.darkTextTheme,
-    colorScheme: ColorScheme.dark(),
+  /* ============================================================
+   * Dark Theme
+   * ============================================================ */
+  static final ThemeData dark = ThemeData(
     useMaterial3: true,
-    appBarTheme: TAppBarTheme.darkAppBarTheme,
-    elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
-    outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
-    inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
+    brightness: Brightness.dark,
+
+    colorScheme: TColorScheme.dark,
+    scaffoldBackgroundColor: TColorScheme.dark.surface,
+
+    textTheme: TTextTheme.dark,
+    appBarTheme: TAppBarTheme.dark,
+
+    elevatedButtonTheme: TElevatedButtonTheme.theme(TColorScheme.dark),
+
+    outlinedButtonTheme: TOutlinedButtonTheme.theme(TColorScheme.dark),
+
+    inputDecorationTheme: TTextFormFieldTheme.light(TColorScheme.dark),
   );
 }
