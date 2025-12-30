@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "639911212248",
+    "project_id": "cointrail-expense-tracker",
+    "storage_bucket": "cointrail-expense-tracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639911212248:android:072220d0158041a79bd3ad",
+        "android_client_info": {
+          "package_name": "com.example.cointrail"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639911212248-5f7vqc3188a4cejor77qbu5p0qfcm8m1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cointrail",
+            "certificate_hash": "81abdbf3eb9cd91c7d8e1d33160bd001ecf8b1fa"
+          }
+        },
+        {
+          "client_id": "639911212248-hq5onphin4on0bkpn3il3bh1cibdhl5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB09BKnTggSPrt60A9yzXs8Vcc7uPDMCfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639911212248-hq5onphin4on0bkpn3il3bh1cibdhl5e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639911212248-d19vqa73gc08iblofk88o87pk85nv7eb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cointrail"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

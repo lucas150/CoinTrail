@@ -7,7 +7,6 @@ import 'package:cointrail/core_utils/constants/sizes.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_circle.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class SplashOnboardingScreen extends StatefulWidget {
   const SplashOnboardingScreen({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../login/widgets/auth_field.dart';
+import '../../../widgets/auth_field.dart';
 
 class RegisterForm extends StatelessWidget {
   final FocusNode emailFocus;
@@ -7,12 +7,21 @@ class RegisterForm extends StatelessWidget {
   final FocusNode passwordFocus;
   final FocusNode confirmPasswordFocus;
 
+  final TextEditingController emailController;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
+
   const RegisterForm({
     super.key,
     required this.emailFocus,
     required this.usernameFocus,
     required this.passwordFocus,
     required this.confirmPasswordFocus,
+    required this.emailController,
+    required this.usernameController,
+    required this.passwordController,
+    required this.confirmPasswordController,
   });
 
   @override
@@ -21,11 +30,8 @@ class RegisterForm extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.only(
-        left: 24,
-        right: 24,
-        bottom: size.height * 0.12, // space for keyboard / CTA
-      ),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
           SizedBox(height: size.height * 0.04),
@@ -35,6 +41,7 @@ class RegisterForm extends StatelessWidget {
             icon: Icons.email_outlined,
             colors: colors,
             focusNode: emailFocus,
+            controller: emailController,
           ),
           const SizedBox(height: 20),
 
@@ -43,6 +50,7 @@ class RegisterForm extends StatelessWidget {
             icon: Icons.person_outline,
             colors: colors,
             focusNode: usernameFocus,
+            controller: usernameController,
           ),
           const SizedBox(height: 20),
 
@@ -50,8 +58,9 @@ class RegisterForm extends StatelessWidget {
             label: 'Password',
             icon: Icons.lock_outline,
             colors: colors,
-            obscure: true,
             focusNode: passwordFocus,
+            controller: passwordController,
+            obscure: true,
           ),
           const SizedBox(height: 20),
 
@@ -59,9 +68,12 @@ class RegisterForm extends StatelessWidget {
             label: 'Confirm Password',
             icon: Icons.lock_outline,
             colors: colors,
-            obscure: true,
             focusNode: confirmPasswordFocus,
+            controller: confirmPasswordController,
+            obscure: true,
           ),
+
+          const SizedBox(height: 120), // space above blob
         ],
       ),
     );

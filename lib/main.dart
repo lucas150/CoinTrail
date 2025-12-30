@@ -1,22 +1,12 @@
 import 'package:cointrail/app/app.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'firebase_options.dart';
 
-Future<void> main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
-  // /// -- README(Update[]) -- GetX Local Storage
-  // await GetStorage.init();
-
-  // /// -- README(Docs[1]) -- Await Splash until other items Load
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  // /// YOUR SUPABASE KEY ID HERE
-  // await Supabase.initialize(url: '', anonKey: '');
-
-  // /// -- README(Docs[2]) -- Initialize Firebase & Authentication Repository
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((_) => Get.put(AuthenticationRepository()));
-
-  /// -- Main App Starts here (app.dart) ...
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Hive.initFlutter();
   runApp(const App());
 }
