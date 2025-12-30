@@ -26,7 +26,7 @@ class TTexts {
 
   // Circle
   static const double initialRadius = 50;
-  static const double expandedRadius = 100;
+  static const double expandedRadius = 200;
   static const double floodRadius = 500;
 
   // Positions

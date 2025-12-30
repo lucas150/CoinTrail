@@ -1,3 +1,4 @@
+import 'package:cointrail/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cointrail/common/buttons/primary_button.dart';
@@ -5,6 +6,8 @@ import 'package:cointrail/core_utils/constants/text_strings.dart';
 import 'package:cointrail/core_utils/constants/sizes.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_circle.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class SplashOnboardingScreen extends StatefulWidget {
   const SplashOnboardingScreen({super.key});
@@ -42,7 +45,7 @@ class _SplashOnboardingScreenState extends State<SplashOnboardingScreen>
             splash.circleRadius.value >= TTexts.expandedRadius;
 
         return Scaffold(
-          backgroundColor: colors.surface,
+          backgroundColor: colors.secondary,
           body: Stack(
             children: [
               /// Animated splash shape
@@ -59,7 +62,7 @@ class _SplashOnboardingScreenState extends State<SplashOnboardingScreen>
                   child: Text(
                     TTexts.appName,
                     style: theme.textTheme.displayLarge?.copyWith(
-                      color: isFloodFill ? colors.onPrimary : colors.primary,
+                      color: isFloodFill ? colors.secondary : colors.primary,
                     ),
                   ),
                 ),
@@ -76,9 +79,19 @@ class _SplashOnboardingScreenState extends State<SplashOnboardingScreen>
                     padding: const EdgeInsets.symmetric(horizontal: TSizes.lg),
                     child: Column(
                       children: [
-                        TPrimaryButton(text: TTexts.signUp, onPressed: () {}),
+                        TPrimaryButton(
+                          text: TTexts.signUp,
+                          onPressed: () {
+                            Get.toNamed(TRoutes.register);
+                          },
+                        ),
                         const SizedBox(height: TSizes.sm),
-                        TPrimaryButton(text: TTexts.login, onPressed: () {}),
+                        TPrimaryButton(
+                          text: TTexts.login,
+                          onPressed: () {
+                            Get.toNamed(TRoutes.login);
+                          },
+                        ),
                       ],
                     ),
                   ),
