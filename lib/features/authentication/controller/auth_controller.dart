@@ -1,5 +1,4 @@
 import 'package:cointrail/routes/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import '../../../data/models/user_model.dart';
 import '../../../data/repositories/auth_repository.dart';
@@ -26,14 +25,13 @@ class AuthController extends GetxController {
 
   Future<void> login(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
+      loading.value = true;
+      user.value = await _repo.login(email: email, password: password);
       Get.toNamed(TRoutes.home);
     } catch (e) {
       Get.snackbar('Login Failed', e.toString());
+    } finally {
+      loading.value = false;
     }
   }
 

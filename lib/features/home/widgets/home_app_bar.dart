@@ -1,3 +1,5 @@
+import 'package:cointrail/features/authentication/controller/splash_navigation_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../routes/routes.dart';
@@ -12,9 +14,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.logout),
-          onPressed: () {
-            // later: FirebaseAuth.instance.signOut();
-            Get.offAllNamed(TRoutes.login);
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            // Reset splash navigation state
+            if (Get.isRegistered<SplashNavigationController>()) {
+              Get.delete<SplashNavigationController>();
+            }
+            Get.offAllNamed(TRoutes.splashOnboardingScreen);
           },
         ),
       ],

@@ -16,6 +16,10 @@ class AuthFirebaseSource {
       password: password,
     );
 
+    if (credential.user == null) {
+      throw Exception('Failed to create user account');
+    }
+
     final user = UserModel(
       id: credential.user!.uid,
       email: email,
@@ -38,6 +42,10 @@ class AuthFirebaseSource {
       email: email,
       password: password,
     );
+
+    if (credential.user == null) {
+      throw Exception('Failed to sign in user');
+    }
 
     final docRef = _db.collection('users').doc(credential.user!.uid);
     final snap = await docRef.get();
