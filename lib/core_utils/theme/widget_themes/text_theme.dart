@@ -17,7 +17,10 @@ class TTextTheme {
       fontSize: 18,
       fontWeight: FontWeight.w600,
     ),
-    titleLarge: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
+    titleLarge: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600),
+    titleMedium: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
+    titleSmall: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400),
+
     bodyLarge: GoogleFonts.poppins(fontSize: 16),
     bodyMedium: GoogleFonts.poppins(fontSize: 14),
     labelLarge: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w500),

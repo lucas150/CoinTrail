@@ -1,14 +1,23 @@
-import 'package:get/get.dart';
+import 'package:cointrail/data/models/transaction_model.dart';
+import 'package:cointrail/data/repositories/home_repository.dart';
+import 'package:flutter/material.dart';
 
-class HomeController extends GetxController {
-  final balance = 0.0.obs;
-  final income = 0.0.obs;
-  final expense = 0.0.obs;
+class HomeController extends ChangeNotifier {
+  final HomeRepository _repository = HomeRepository();
 
-  @override
-  void onInit() {
-    super.onInit();
-    // Later:
-    // loadFromHive();
+  String get userName => _repository.getUserName();
+
+  get monthlySummary => _repository.getMonthlySummary();
+
+  get categories => _repository.getCategories();
+
+  get recentTransactions => _repository.getRecentTransactions();
+  get expenseSummary => _repository.getExpenseSummary();
+
+  get incomeSummary => _repository.getIncomeSummary();
+
+  void addTransaction(TransactionModel transaction) {
+    _repository.addTransaction(transaction);
+    notifyListeners();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cointrail/core_utils/theme/AppGradients.dart';
 import 'package:flutter/material.dart';
 import 'color_scheme.dart';
 
@@ -28,6 +29,7 @@ class TAppTheme {
     outlinedButtonTheme: TOutlinedButtonTheme.theme(TColorScheme.light),
 
     inputDecorationTheme: TTextFormFieldTheme.light(TColorScheme.light),
+    extensions: const [lightCardGradient],
   );
 
   /* ============================================================
@@ -48,5 +50,7 @@ class TAppTheme {
     outlinedButtonTheme: TOutlinedButtonTheme.theme(TColorScheme.dark),
 
     inputDecorationTheme: TTextFormFieldTheme.light(TColorScheme.dark),
+
+    extensions: const [darkCardGradient],
   );
 }

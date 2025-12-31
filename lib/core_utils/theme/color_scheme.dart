@@ -1,86 +1,100 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 class TColorScheme {
   const TColorScheme._();
 
-  // ===============================
-  // Brand Colors
-  // ===============================
-  static const Color lightPrimary = Color(0xFF1E40AF);
-  static const Color lightOnPrimary = Colors.white;
-  static const Color lightSecondary = Color(0xFF38BDF8);
-  static const Color lightOnSecondary = Colors.white;
+  /* ============================================================
+   * LIGHT THEME — Expense Tracker
+   * Palette:
+   * #ff9f1c #ffbf69 #ffffff #cbf3f0 #2ec4b6
+   * ============================================================ */
 
-  // ===============================
-  // Light Theme Colors
-  // ===============================
-  static const Color lightBackground = Color(0xFFF8FAFC);
+  // Brand
+  static const Color lightPrimary = Color(0xFF2EC4B6); // Teal
+  static const Color lightSecondary = Color(0xFFFF9F1C); // Orange
+
+  // Canvas & Surfaces
+  static const Color lightBackground = Color(0xFFFFFFFF); // White
+  static const Color lightSurface = Color(0xFFFFFFFF); // Cards / sections
+  static const Color lightSurfaceContainer = Color(0xFFCBF3F0); // Soft mint
+
+  // Text
   static const Color lightOnBackground = Color(0xFF0F172A);
+  static const Color lightOnSurface = Color(0xFF0F172A);
 
-  // ===============================
-  // Dark Theme Colors
-  // ===============================
-
-  // ===============================
-  // Dark Brand Colors
-  // ===============================
-  static const Color darkPrimary = Color(0xFF1E40AF);
-  static const Color darkOnPrimary = Colors.white;
-  static const Color darkSecondary = Color(0xFF38BDF8);
-  static const Color darkOnSecondary = Colors.white;
-
-  // ===============================
-  // Dark Theme Colors
-  // ===============================
-  static const Color darkSurface = Color(0xFF020617);
-  static const Color darkOnSurface = Color(0xFFE5E7EB);
-
-  // ===============================
   // Semantic
-  // ===============================
+  static const Color income = Color(0xFF2EC4B6);
+  static const Color expense = Color(0xFFFF9F1C);
+  static const Color divider = Color(0xFFE5E7EB);
   static const Color error = Color(0xFFDC2626);
 
-  // ===============================
-  // Light ColorScheme
-  // ===============================
+  /* ----------------------------
+   * Light ColorScheme
+   * ---------------------------- */
   static final ColorScheme light = ColorScheme(
     brightness: Brightness.light,
 
     primary: lightPrimary,
-    onPrimary: lightOnPrimary,
+    onPrimary: Colors.white,
 
     secondary: lightSecondary,
-    onSecondary: lightOnSecondary,
-
-    surface: lightBackground,
-    onSurface: lightOnBackground,
+    onSecondary: Colors.white,
 
     background: lightBackground,
     onBackground: lightOnBackground,
+
+    surface: lightSurface,
+    onSurface: lightOnSurface,
+
+    surfaceContainerHighest: lightSurfaceContainer,
 
     error: error,
     onError: Colors.white,
   );
 
-  // ===============================
-  // Dark ColorScheme
-  // ===============================
+  /* ============================================================
+   * DARK THEME — Fintech Dark Mode
+   * Palette:
+   * #0466c8 #0353a4 #023e7d #002855 #001845
+   * #001233 #33415c #5c677d #7d8597 #979dac
+   * ============================================================ */
+
+  // Brand
+  static const Color darkPrimary = Color(0xFF0466C8);
+  static const Color darkSecondary = Color(0xFF5C677D);
+
+  // Canvas & Surfaces
+  static const Color darkBackground = Color(0xFF001233);
+  static const Color darkSurface = Color(0xFF001233);
+  static const Color darkSurfaceContainer = Color(0xFF023E7D);
+
+  // Text
+  static const Color darkOnBackground = Colors.white;
+  static const Color darkOnSurface = Colors.white;
+  static const Color darkTextSecondary = Color(0xFF979DAC);
+
+  // Semantic
+  static const Color darkDivider = Color(0xFF33415C);
+
+  /* ----------------------------
+   * Dark ColorScheme
+   * ---------------------------- */
   static final ColorScheme dark = ColorScheme(
     brightness: Brightness.dark,
 
     primary: darkPrimary,
-    onPrimary: darkOnPrimary,
+    onPrimary: Colors.white,
 
     secondary: darkSecondary,
-    onSecondary: darkOnSecondary,
+    onSecondary: Colors.white,
+
+    background: darkBackground,
+    onBackground: darkOnBackground,
 
     surface: darkSurface,
     onSurface: darkOnSurface,
 
-    background: darkSurface,
-    onBackground: darkOnSurface,
+    surfaceContainerHighest: darkSurfaceContainer,
 
     error: error,
     onError: Colors.white,

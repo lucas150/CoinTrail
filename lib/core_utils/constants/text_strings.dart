@@ -9,6 +9,23 @@ class TTexts {
   static const String welcome = 'Welcome';
   static const String continueText = 'Continue';
 
+  // Home
+  static const String header_Tagline = 'Where your expenses find their home';
+  // -----------------------
+  // Home Cards
+  // -----------------------
+  static const String homeCard_TotalSpent = 'Total Spent This Month';
+
+  static const String homeCard_Expense = 'Expenses';
+
+  static const String homeCard_Income = 'Income';
+
+  static const String homeCard_MonthlyBalance = 'Monthly Balance';
+
+  static const String homeCard_WeeklyBalance = 'Weekly Balance';
+
+  static const String homeCard_DailyBalance = 'Daily Balance';
+
   // Radius TSplashTokens
   static const double floodRadiusThreshold = 400;
   static const double initialCurveOffset = 50;
