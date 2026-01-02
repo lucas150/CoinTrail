@@ -23,14 +23,14 @@ class HomePage extends StatelessWidget {
             SliverToBoxAdapter(
               child: SizedBox(
                 height:
-                    350, // Enough space for header (180) + carousel (200) with overlap
+                    370, // Enough space for header (180) + carousel (200) with overlap
                 child: Stack(
                   children: [
                     // Header
                     const HomeHeader(),
                     // Carousel positioned to overlap
                     Positioned(
-                      top: 130, // Position it to overlap with header's curve
+                      top: 150, // Position it to overlap with header's curve
                       left: 0,
                       right: 0,
                       child: const HomeBalanceCarousel(),

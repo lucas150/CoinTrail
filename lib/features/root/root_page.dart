@@ -1,3 +1,5 @@
+import 'package:cointrail/features/analysis/screen/analysis_page.dart';
+import 'package:cointrail/features/settings/screen/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cointrail/features/navbar/nav_bar.dart';
 import 'package:cointrail/features/home/screens/home_page.dart';
@@ -15,10 +17,10 @@ class _RootPageState extends State<RootPage> {
 
   final _pages = const [
     HomePage(),
-    Scaffold(body: Center(child: Text('Analysis'))),
-    SizedBox(), // Add (modal)
+    AnalysisPage(),
+    SizedBox(),
     SearchPage(),
-    Scaffold(body: Center(child: Text('Settings'))),
+    SettingsPage(),
   ];
 
   void _onTabChanged(int index) {
