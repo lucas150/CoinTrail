@@ -17,7 +17,7 @@ class AuthController extends GetxController {
         password: password,
         username: username,
       );
-      Get.toNamed(TRoutes.home);
+      Get.toNamed(TRoutes.root);
     } finally {
       loading.value = false;
     }
@@ -27,7 +27,7 @@ class AuthController extends GetxController {
     try {
       loading.value = true;
       user.value = await _repo.login(email: email, password: password);
-      Get.toNamed(TRoutes.home);
+      Get.toNamed(TRoutes.root);
     } catch (e) {
       Get.snackbar('Login Failed', e.toString());
     } finally {

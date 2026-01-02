@@ -1,7 +1,6 @@
 import 'package:cointrail/core_utils/theme/theme.dart';
 import 'package:cointrail/features/authentication/screens/splash/splash_onboarding_screen.dart';
 import 'package:cointrail/routes/app_routes.dart';
-import 'package:cointrail/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

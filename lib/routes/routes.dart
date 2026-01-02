@@ -6,6 +6,12 @@ class TRoutes {
   // Auth
   static const login = '/login';
   static const register = '/register';
-  static const home = '/home';
 
+    static const root = '/root'; 
+
+
+  static const home = '/home';
+  static const analysis = '/analysis';
+  static const search = '/search';
+  static const settings = '/settings';
 }

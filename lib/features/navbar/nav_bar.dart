@@ -2,25 +2,24 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  final int currentIndex;
+  final ValueChanged<int> onChanged;
+
+  const NavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onChanged,
+  });
 
   @override
   State<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarState extends State<NavBar>
-    with SingleTickerProviderStateMixin {
+class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   static const int _itemCount = 5;
-
-  int _selectedIndex = 2;
 
   late AnimationController _controller;
   late Animation<double> _animation;
-
-  final List<GlobalKey> _itemKeys = List.generate(
-    _itemCount,
-    (_) => GlobalKey(),
-  );
 
   final _icons = const [
     Icons.home,
@@ -46,26 +45,12 @@ class _NavBarState extends State<NavBar>
     _controller.forward();
   }
 
-  void _onTap(int index) {
-    setState(() => _selectedIndex = index);
-    _controller.forward(from: 0);
-
-    if (index == 2) {
-      // TODO: Open Add modal
-      return;
+  @override
+  void didUpdateWidget(covariant NavBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.currentIndex != widget.currentIndex) {
+      _controller.forward(from: 0);
     }
-    setState(() => _selectedIndex = index);
-    _controller.forward(from: 0);
-  }
-
-  double _getSelectedItemCenterX(BuildContext context) {
-    final box =
-        _itemKeys[_selectedIndex].currentContext?.findRenderObject()
-            as RenderBox?;
-    if (box == null) return MediaQuery.of(context).size.width / 2;
-
-    final position = box.localToGlobal(Offset.zero);
-    return position.dx + box.size.width / 2;
   }
 
   @override
@@ -74,64 +59,72 @@ class _NavBarState extends State<NavBar>
     super.dispose();
   }
 
+  double _centerX(Size size) {
+    final sectionWidth = size.width / _itemCount;
+    return sectionWidth * widget.currentIndex + sectionWidth / 2;
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return Container(
-      padding: const EdgeInsets.only(top: 12, bottom: 16),
-      decoration: BoxDecoration(
-        color: colors.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, -6),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // ─────────────────────────────
-          // SMOOTH LINE + CIRCULAR BUMP
-          // ─────────────────────────────
-          AnimatedBuilder(
-            animation: _animation,
-            builder: (_, __) {
-              return CustomPaint(
-                painter: _NavLinePainter(
-                  color: colors.primary,
-                  centerX: _getSelectedItemCenterX(context),
-                  progress: _animation.value,
-                ),
-                child: const SizedBox(height: 18, width: double.infinity),
-              );
-            },
-          ),
-
-          const SizedBox(height: 6),
-
-          // ─────────────────────────────
-          // NAV ICONS
-          // ─────────────────────────────
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(
-              _itemCount,
-              (index) => _NavIcon(
-                key: _itemKeys[index],
-                icon: _icons[index],
-                label: _labels[index],
-                isSelected: _selectedIndex == index,
-                isCenter: index == 2,
-                onTap: () => _onTap(index),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          padding: const EdgeInsets.only(top: 12, bottom: 16),
+          decoration: BoxDecoration(
+            color: colors.surface,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.08),
+                blurRadius: 20,
+                offset: const Offset(0, -6),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // ─────────────────────────
+              // LINE + CIRCULAR BUMP
+              // ─────────────────────────
+              AnimatedBuilder(
+                animation: _animation,
+                builder: (_, __) {
+                  return CustomPaint(
+                    painter: _NavLinePainter(
+                      color: colors.primary,
+                      centerX: _centerX(constraints.biggest),
+                      progress: _animation.value,
+                    ),
+                    child: const SizedBox(height: 18, width: double.infinity),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 6),
+
+              // ─────────────────────────
+              // ICONS
+              // ─────────────────────────
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  _itemCount,
+                  (index) => _NavIcon(
+                    icon: _icons[index],
+                    label: _labels[index],
+                    isSelected: widget.currentIndex == index,
+                    isCenter: index == 2,
+                    onTap: () => widget.onChanged(index),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -172,7 +165,7 @@ class _NavIcon extends StatelessWidget {
             if (isCenter)
               Container(
                 width: 48,
-                height: 28,
+                height: 48,
                 decoration: BoxDecoration(
                   color: colors.primary,
                   shape: BoxShape.circle,
@@ -229,7 +222,7 @@ class _NavLinePainter extends CustomPainter {
     final horizontalRadius = 28 * eased;
 
     final path = Path();
-    const segments = 140;
+    const segments = 160;
 
     for (int i = 0; i <= segments; i++) {
       final x = size.width * (i / segments);

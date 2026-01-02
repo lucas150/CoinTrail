@@ -25,7 +25,7 @@ class SplashNavigationController extends GetxController {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      Get.offAllNamed(TRoutes.home);
+      Get.offAllNamed(TRoutes.root);
     }
     // If no user, stay on current splash screen with login/register buttons
   }

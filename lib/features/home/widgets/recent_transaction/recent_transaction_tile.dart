@@ -18,6 +18,7 @@ class RecentTransactionTile extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: TSizes.sm),
+      
       child: Row(
         children: [
           // ----------------------------------

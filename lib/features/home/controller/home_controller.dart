@@ -1,3 +1,4 @@
+import 'package:cointrail/data/mock/home_mock_data.dart';
 import 'package:cointrail/data/models/transaction_model.dart';
 import 'package:cointrail/data/repositories/home_repository.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ class HomeController extends ChangeNotifier {
   get expenseSummary => _repository.getExpenseSummary();
 
   get incomeSummary => _repository.getIncomeSummary();
+
+  List<TransactionModel> getAllTransactions() {
+    return List.unmodifiable(HomeMockData.transactions);
+  }
 
   void addTransaction(TransactionModel transaction) {
     _repository.addTransaction(transaction);
