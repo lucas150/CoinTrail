@@ -7,16 +7,18 @@ class TOutlinedButtonTheme {
   static OutlinedButtonThemeData theme(ColorScheme colors) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: colors.primary,
-        side: BorderSide(color: colors.primary, width: 1.2),
+        foregroundColor: colors.onSurface,
+        side: BorderSide(color: colors.onSurface, width: 1),
 
-        disabledForegroundColor: colors.onSurface.withOpacity(0.38),
+        disabledForegroundColor: colors.onSurface.withOpacity(0.2),
 
-        padding: const EdgeInsets.symmetric(vertical: TSizes.buttonHeight),
-
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
+        padding: const EdgeInsets.symmetric(
+          vertical: TSizes.elevatedButtonHeight,
         ),
+
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
+        // ),
       ),
     );
   }

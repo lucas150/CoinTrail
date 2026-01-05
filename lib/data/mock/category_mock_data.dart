@@ -52,6 +52,8 @@ class CategoryMockData {
     ),
   ];
 
+
+
   static List<CategoryModel> get all => [
     ...expenseCategories,
     ...incomeCategories,

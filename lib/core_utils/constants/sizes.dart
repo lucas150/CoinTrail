@@ -5,6 +5,7 @@ class TSizes {
   static const double md = 16.0;
   static const double lg = 20.0;
   static const double xl = 30.0;
+  static const double xxl = 40.0;
 
   // Icon sizes
   static const double iconXs = 12.0;
@@ -18,8 +19,11 @@ class TSizes {
   static const double fontSizeLg = 18.0;
 
   // Button sizes
+  static const double elevatedButtonHeight = 12.0;
+
   static const double buttonHeight = 16.0;
   static const double buttonRadius = 22.0;
+  static const double buttonPadding = 70.0;
   static const double buttonWidth = 120.0;
   static const double buttonElevation = 4.0;
 

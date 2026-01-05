@@ -7,6 +7,8 @@ class AppHeader extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.bottom,
+    this.bottom_widget,
+    this.extendedHeight = false,
     this.centerWidget,
     this.showBack = false,
     this.showNotification = false,
@@ -16,6 +18,8 @@ class AppHeader extends StatelessWidget {
 
   final String title;
   final String? subtitle;
+  final Widget? bottom_widget;
+  final bool extendedHeight;
 
   /// Optional content BELOW title row
   final Widget? bottom;
@@ -33,8 +37,12 @@ class AppHeader extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final statusBar = MediaQuery.of(context).padding.top;
+    final double baseHeight = 210;
 
-    final double headerHeight = 210 + statusBar;
+    final double extendedExtra = extendedHeight ? 100 : 0;
+
+    // final double headerHeight = 210 + statusBar;
+    final double headerHeight = baseHeight + extendedExtra + statusBar;
 
     return SizedBox(
       height: headerHeight,
@@ -54,7 +62,7 @@ class AppHeader extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              height: 80,
+              height: 80 + (extendedHeight ? 100 : 0),
               decoration: BoxDecoration(
                 color: colors.surface,
                 borderRadius: const BorderRadius.vertical(
@@ -141,6 +149,11 @@ class AppHeader extends StatelessWidget {
                 if (bottom != null) ...[
                   const SizedBox(height: TSizes.sm),
                   bottom!,
+                ],
+
+                if (bottom_widget != null) ...[
+                  const SizedBox(height: TSizes.buttonPadding),
+                  bottom_widget!,
                 ],
               ],
             ),

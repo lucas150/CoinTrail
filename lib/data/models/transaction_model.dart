@@ -1,20 +1,28 @@
 enum TransactionType { income, expense }
 
+enum PaymentMode { cash, card, upi, bank }
+
 class TransactionModel {
   final String id;
   final String title;
-  final double amount;
   final TransactionType type;
+  final double amount;
   final String category;
   final DateTime date;
+  final PaymentMode paymentMode;
+  final String? note;
+  final String? receiptPath;
 
   const TransactionModel({
     required this.id,
     required this.title,
-    required this.amount,
     required this.type,
+    required this.amount,
     required this.category,
     required this.date,
+    this.paymentMode = PaymentMode.cash,
+    this.note,
+    this.receiptPath,
   });
 
   // ----------------------------------------

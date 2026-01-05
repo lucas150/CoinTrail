@@ -18,7 +18,7 @@ class RecentTransactionTile extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: TSizes.sm),
-      
+
       child: Row(
         children: [
           // ----------------------------------
@@ -27,10 +27,7 @@ class RecentTransactionTile extends StatelessWidget {
           Container(
             width: 36,
             height: 36,
-            decoration: BoxDecoration(
-              color: amountColor.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: Icon(
               _iconForCategory(transaction.category),
               size: 18,
