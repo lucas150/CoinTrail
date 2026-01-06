@@ -10,6 +10,7 @@ class AppHeader extends StatelessWidget {
     this.subtitle,
     this.bottom,
     this.home_carousel,
+    this.bottom_analysis,
     this.extendedHeight = false,
     this.centerWidget,
     this.showBack = false,
@@ -17,7 +18,7 @@ class AppHeader extends StatelessWidget {
     this.onBack,
     this.onNotificationTap,
     this.pinnedWidgets = const [], // Widgets to pin
-    this.scrollableWidgets = const [], // Widgets that scroll
+    this.scrollableWidgets = const [],
   });
 
   // Main title text shown at the top
@@ -34,6 +35,8 @@ class AppHeader extends StatelessWidget {
 
   // Legacy bottom content (kept for compatibility)
   final Widget? bottom;
+
+  final Widget? bottom_analysis;
 
   // Optional widget shown in the center (like a profile picture)
   final Widget? centerWidget;
@@ -79,6 +82,7 @@ class AppHeader extends StatelessWidget {
         home_carousel: home_carousel,
         extendedHeight: extendedHeight,
         centerWidget: centerWidget,
+        bottom_analysis: bottom_analysis,
         showBack: showBack,
         showNotification: showNotification,
         onBack: onBack,
@@ -101,6 +105,7 @@ class _AppHeaderDelegate extends SliverPersistentHeaderDelegate {
     this.subtitle,
     this.bottom,
     this.home_carousel,
+    this.bottom_analysis,
     required this.extendedHeight,
     this.centerWidget,
     required this.showBack,
@@ -118,6 +123,7 @@ class _AppHeaderDelegate extends SliverPersistentHeaderDelegate {
   final String title;
   final String? subtitle;
   final Widget? home_carousel;
+  final Widget? bottom_analysis;
   final bool extendedHeight;
   final Widget? bottom;
   final Widget? centerWidget;
@@ -146,10 +152,11 @@ class _AppHeaderDelegate extends SliverPersistentHeaderDelegate {
     if (subtitle != null) height += 35;
 
     // Add height if bottom widget exists
-    if (bottom != null) height += 45;
+    if (bottom != null) height += 0;
 
     // Add height if home_carousel exists
     if (home_carousel != null) height += 140;
+    if (bottom_analysis != null) height += 40;
 
     // Add height for each pinned widget
     if (pinnedWidgets.isNotEmpty) height += 60 * pinnedWidgets.length;
@@ -325,8 +332,14 @@ class _AppHeaderDelegate extends SliverPersistentHeaderDelegate {
 
                     // Legacy home_carousel (if exists)
                     if (home_carousel != null) ...[
-                      const SizedBox(height: TSizes.xxxl),
+                      const SizedBox(height: TSizes.xxl),
                       home_carousel!,
+                    ],
+
+                    // Bottom analysis widget (if exists)
+                    if (bottom_analysis != null) ...[
+                      const SizedBox(height: TSizes.xxxl),
+                      bottom_analysis!,
                     ],
 
                     // Pinned widgets (fade slower - only 50% max fade)
@@ -361,7 +374,7 @@ class _AppHeaderDelegate extends SliverPersistentHeaderDelegate {
           if (centerWidget != null)
             Positioned(
               // Moves up faster than other content (0.8x multiplier)
-              top: (70 + statusBar) - shrinkOffset * 0.8,
+              top: (40 + statusBar) - shrinkOffset * 0.8,
               left: 0,
               right: 0,
               child: Opacity(

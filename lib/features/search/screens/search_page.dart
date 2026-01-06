@@ -39,25 +39,10 @@ class _SearchView extends StatelessWidget {
             // Content as a sliver
             SliverToBoxAdapter(
               child: Stack(
-                clipBehavior: Clip.none,
                 children: [
                   // Main content column
                   Column(
-                    children: [
-                      // Dynamic space for overlapping filters
-                      SizedBox(height: totalSpacing),
-
-                      // Results
-                      const SearchResultsSection(),
-                    ],
-                  ),
-
-                  // Overlapping filters
-                  const Positioned(
-                    top: 0, // Adjusted position since header is now in sliver
-                    left: 0,
-                    right: 0,
-                    child: SearchFiltersSection(),
+                    children: [SearchFiltersSection(), SearchResultsSection()],
                   ),
                 ],
               ),

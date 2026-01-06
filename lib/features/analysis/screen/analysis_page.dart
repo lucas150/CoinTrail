@@ -1,6 +1,8 @@
 import 'package:cointrail/common/header/appHeader.dart';
 import 'package:cointrail/common/header/widgets/income_expense_summart.dart';
+import 'package:cointrail/core_utils/constants/sizes.dart';
 import 'package:cointrail/features/analysis/controller/analysis_controller.dart';
+import 'package:cointrail/features/home/widgets/chart/spending_by_category_section.dart';
 import 'package:cointrail/features/settings/widgets/common/settings_card.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +39,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
             showNotification: true,
             extendedHeight: true,
 
-            bottom: IncomeExpenseSummary(
+            bottom_analysis: IncomeExpenseSummary(
               totalBalance: 7783.00,
               totalExpense: 1187.40,
               limit: 20000,
@@ -50,7 +52,12 @@ class _AnalysisPageState extends State<AnalysisPage> {
               animation: controller,
               builder: (_, __) {
                 return Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.fromLTRB(
+                    TSizes.md,
+                    0,
+                    TSizes.md,
+                    0,
+                  ),
                   child: Column(
                     children: [
                       /// Overview
@@ -77,6 +84,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
                       ),
 
                       const SizedBox(height: 24),
+                      SpendingByCategorySection(),
 
                       /// Category Breakdown
                       SettingsCard(
@@ -91,28 +99,6 @@ class _AnalysisPageState extends State<AnalysisPage> {
                             const SizedBox(height: 12),
                             ...controller.categoryBreakdown.entries.map(
                               (e) => _CategoryRow(name: e.key, amount: e.value),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      /// Trend Placeholder
-                      SettingsCard(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Spending Trend',
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 12),
-                            Center(
-                              child: Text(
-                                'Chart coming soon',
-                                style: TextStyle(color: Colors.grey),
-                              ),
                             ),
                           ],
                         ),

@@ -92,15 +92,15 @@ class _SettingsPageState extends State<SettingsPage> {
       body: CustomScrollView(
         slivers: [
           /// ───────── HEADER (PINNED) ─────────
-          // AppHeader(
-          //   title: 'Settings',
-          //   showBack: true,
-          //   showNotification: true,
-          //   centerWidget: ProfileAvatar(
-          //     imageUrl: settingsController.imageUrl,
-          //     name: settingsController.fullName,
-          //   ),
-          // ),
+          AppHeader(
+            title: 'Settings',
+            showBack: true,
+            showNotification: true,
+            centerWidget: ProfileAvatar(
+              imageUrl: settingsController.imageUrl,
+              name: settingsController.fullName,
+            ),
+          ),
 
           /// ───────── SETTINGS CONTENT ─────────
           SliverList(
