@@ -104,9 +104,7 @@ class _CarouselItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: TSizes.spaceBtwInputFields,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
       child: child,
     );
   }

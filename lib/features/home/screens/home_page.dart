@@ -14,43 +14,21 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.surface,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            // ─────────────────────────
-            // HEADER + CAROUSEL OVERLAP
-            // ─────────────────────────
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height:
-                    370, // Enough space for header (180) + carousel (200) with overlap
-                child: Stack(
-                  children: [
-                    // Header
-                    const HomeHeader(),
-                    // Carousel positioned to overlap
-                    Positioned(
-                      top: 150, // Position it to overlap with header's curve
-                      left: 0,
-                      right: 0,
-                      child: const HomeBalanceCarousel(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+      body: CustomScrollView(
+        slivers: [
+          /// ───────────────── HEADER (SLIVER) ─────────────────
+          const HomeHeader(),
 
-            // ─────────────────────────
-            // CONTENT CARD
-            // ─────────────────────────
-            SliverToBoxAdapter(
+          /// ───────────────── CONTENT CARD ─────────────────
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(
+              TSizes.md,
+              0, // compensate for overlap
+              TSizes.md,
+              0,
+            ),
+            sliver: SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.fromLTRB(
-                  TSizes.md,
-                  TSizes.xl, // Add more top margin to account for carousel
-                  TSizes.md,
-                  TSizes.xl,
-                ),
                 padding: const EdgeInsets.all(TSizes.lg),
                 decoration: BoxDecoration(
                   color: colors.surfaceContainerHigh,
@@ -63,9 +41,9 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     SpendingByCategorySection(),
                     SizedBox(height: TSizes.spaceBtwSections),
                     RecentTransactionsSection(),
@@ -73,8 +51,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

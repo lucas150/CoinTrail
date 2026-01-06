@@ -31,32 +31,38 @@ class _SearchView extends StatelessWidget {
         final categoryHeight = controller.showCategorySelector ? 120.0 : 0.0;
         final totalSpacing = baseSpacing + calendarHeight + categoryHeight;
 
-        return SingleChildScrollView(
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              // HEADER
-              Column(
+        return CustomScrollView(
+          slivers: [
+            // HEADER (as a sliver)
+            const SearchHeader(),
+
+            // Content as a sliver
+            SliverToBoxAdapter(
+              child: Stack(
+                clipBehavior: Clip.none,
                 children: [
-                  const SearchHeader(),
+                  // Main content column
+                  Column(
+                    children: [
+                      // Dynamic space for overlapping filters
+                      SizedBox(height: totalSpacing),
 
-                  // Dynamic space for overlapping filters
-                  SizedBox(height: totalSpacing),
+                      // Results
+                      const SearchResultsSection(),
+                    ],
+                  ),
 
-                  // Results
-                  const SearchResultsSection(),
+                  // Overlapping filters
+                  const Positioned(
+                    top: 0, // Adjusted position since header is now in sliver
+                    left: 0,
+                    right: 0,
+                    child: SearchFiltersSection(),
+                  ),
                 ],
               ),
-
-              // Overlapping filters
-              const Positioned(
-                top: 220,
-                left: 0,
-                right: 0,
-                child: SearchFiltersSection(),
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

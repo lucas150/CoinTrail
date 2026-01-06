@@ -38,15 +38,15 @@ class _AddTransactionView extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: AppHeader(
-                title: 'Add Transaction',
-                showBack: true,
+            // SliverToBoxAdapter(
+            //   child: AppHeader(
+            //     title: 'Add Transaction',
+            //     showBack: true,
 
-                bottom_widget: DatePicker(controller: controller),
-                extendedHeight: true,
-              ),
-            ),
+            //     bottom_widget: DatePicker(controller: controller),
+            //     extendedHeight: true,
+            //   ),
+            // ),
             // ───────── FORM CONTENT ─────────
             SliverToBoxAdapter(
               child: Padding(

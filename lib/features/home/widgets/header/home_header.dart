@@ -109,6 +109,7 @@
 // }
 
 import 'package:cointrail/common/header/appHeader.dart';
+import 'package:cointrail/features/home/widgets/carousel_card/home_balance_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -126,6 +127,7 @@ class HomeHeader extends StatelessWidget {
       title: 'Welcome, ${controller.userName} 👋',
       subtitle: TTexts.header_Tagline,
       showNotification: true,
+      home_carousel: HomeBalanceCarousel(),
       onNotificationTap: () {
         // TODO: navigate to notifications
       },
